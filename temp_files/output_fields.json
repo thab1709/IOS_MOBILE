@@ -1,0 +1,43 @@
+Found FieldType 22:
+[
+  {
+    "id": "8f2902f3-2779-4b7b-8c63-48850cf228b1",
+    "formId": "14111eab-4367-46fc-9115-d83fa39c371d",
+    "parentId": "91860deb-dbba-4994-adbe-062af05bfeba",
+    "title": "(Bản sao)",
+    "subTitle": null,
+    "fieldName": null,
+    "fieldType": 22,
+    "isRequired": false,
+    "additionalData": "",
+    "row": 1,
+    "column": 4,
+    "size": 24,
+    "style": "{}",
+    "defaultValue": null,
+    "value": null,
+    "createdDate": "2026-06-29T08:43:30.8309224",
+    "createdBy": "51bd8c19-2fc2-46ff-caf1-08d99e913a72",
+    "updatedDate": "2026-06-30T07:48:38.3967522",
+    "updatedBy": "69bd714f-9576-45ba-b5b7-f00649be00de",
+    "api": null,
+    "formula": null,
+    "formulaCode": null,
+    "fieldFormula": null,
+    "apiCode": null,
+    "relationKey": null,
+    "reportType": null,
+    "isDisable": null,
+    "tableName": null,
+    "isSyncPmis": null,
+    "syncPmisCode": null,
+    "fieldThresholdMapping": null,
+    "vectorGroup": null,
+    "currentTemperature": null,
+    "fieldThresholdMappings": [],
+    "children": []
+  }
+]
+
+--- Tab 3 structure ---
+No Tab 3 found

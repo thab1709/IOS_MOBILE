@@ -1,0 +1,160 @@
+﻿{
+    "data":  [
+                 {
+                     "id":  "aba93a4a-e35b-41a2-a4c6-63531c8e2a52",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Hoàn tất phê duyệt",
+                     "actionBy":  "Hoàng Ngọc Quân",
+                     "actionById":  "8f55c680-ccf1-458b-98e6-97491ce182fd",
+                     "actionDate":  "2026-06-24T15:51:56.1815649",
+                     "note":  "Tất cả các thành phần đã ký duyệt. Biên bản chính thức có hiệu lực.",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "7433cf54-d43e-45c9-8783-ab6eaaa6ac55",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "Hoàng Ngọc Quân",
+                     "actionById":  "8f55c680-ccf1-458b-98e6-97491ce182fd",
+                     "actionDate":  "2026-06-24T15:51:56.1812475",
+                     "note":  "Ký duyệt bởi Hoàng Ngọc Quân (Lãnh đạo)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "0955a6d3-9047-4c1a-ae2b-4b7e9f1842f9",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "Hoàng Thanh Tùng",
+                     "actionById":  "ae9e5bad-a5cc-4c14-8187-08db73ca157c",
+                     "actionDate":  "2026-06-22T10:49:26.4528803",
+                     "note":  "Ký duyệt bởi Hoàng Thanh Tùng (GĐ/Phó giám đốc trung tâm)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "66ee13ce-2da0-4777-b324-7e99a75a74f6",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "Đào Quốc Hướng",
+                     "actionById":  "4bfc2661-a011-4116-cb12-08d99e913a72",
+                     "actionDate":  "2026-06-22T10:48:53.9856333",
+                     "note":  "Ký duyệt bởi Đào Quốc Hướng (Đội trưởng)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "84a4301b-846c-4ba9-ba59-5e5261c4afee",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  2,
+                     "actionName":  "Gửi duyệt biên bản",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-22T10:47:51.9583254",
+                     "note":  "Gửi duyệt biên bản khảo sát",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "045ec201-60d8-46fe-80c1-c43cd8dbadc8",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  1,
+                     "actionName":  "Cập nhật thông tin",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-22T10:47:45.9041556",
+                     "note":  "Cập nhật thông tin biên bản khảo sát",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "3030e752-8fa4-41f9-862a-d240293b429e",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  5,
+                     "actionName":  "Sửa lại sau từ chối",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-22T10:30:58.3799375",
+                     "note":  "Sửa đổi thông tin biên bản sau khi bị từ chối",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "241c6d71-920d-4e5a-a694-d04334051b07",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  4,
+                     "actionName":  "Từ chối phê duyệt",
+                     "actionBy":  "C02 - Chuyên viên",
+                     "actionById":  "4b2a8266-0773-4a36-d341-08d9a4cd043c",
+                     "actionDate":  "2026-06-22T10:26:59.1225492",
+                     "note":  "từ chối",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "c3f19fe8-6cab-46b5-8ef1-311526981ae2",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "C01",
+                     "actionById":  "1ce3182c-5854-434c-d32c-08d9a4cd043c",
+                     "actionDate":  "2026-06-22T10:26:06.5398225",
+                     "note":  "Ký duyệt bởi C01 (Chuyên viên Điện Lực)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "1430f22d-bb3c-4fb4-93a9-d39f67715629",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "Hoàng Thanh Tùng",
+                     "actionById":  "ae9e5bad-a5cc-4c14-8187-08db73ca157c",
+                     "actionDate":  "2026-06-19T18:52:12.1853922",
+                     "note":  "Ký duyệt bởi Hoàng Thanh Tùng (GĐ/Phó giám đốc trung tâm)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "145165d1-1b12-432d-ae24-e3d60980bbd8",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  3,
+                     "actionName":  "Ký duyệt biên bản",
+                     "actionBy":  "Đào Quốc Hướng",
+                     "actionById":  "4bfc2661-a011-4116-cb12-08d99e913a72",
+                     "actionDate":  "2026-06-19T18:35:57.663427",
+                     "note":  "Ký duyệt bởi Đào Quốc Hướng (Đội trưởng)",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "632faa52-c673-49d4-a864-057fbbd2e4e8",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  2,
+                     "actionName":  "Gửi duyệt biên bản",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-19T18:12:59.8716634",
+                     "note":  "Gửi duyệt biên bản khảo sát",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "91f1658e-4bb8-4193-b7aa-a7e458f20a39",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  1,
+                     "actionName":  "Cập nhật thông tin",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-19T18:12:48.4047215",
+                     "note":  "Cập nhật thông tin biên bản khảo sát",
+                     "nextSigners":  null
+                 },
+                 {
+                     "id":  "8f278700-981d-4f78-915a-c58c5cac038a",
+                     "surveyReportId":  "bc58d770-7587-4b35-8642-9df8a43bc4af",
+                     "action":  1,
+                     "actionName":  "Tạo mới biên bản",
+                     "actionBy":  "Administrator",
+                     "actionById":  "69bd714f-9576-45ba-b5b7-f00649be00de",
+                     "actionDate":  "2026-06-19T18:12:10.3331771",
+                     "note":  "Tạo mới biên bản khảo sát",
+                     "nextSigners":  null
+                 }
+             ],
+    "message":  null,
+    "statusCode":  200
+}

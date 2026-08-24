@@ -1,0 +1,491 @@
+TẬP ĐOÀN ĐIỆN LỰC VIỆT NAM
+TỔNG CÔNG TY ĐIỆN LỰC THÀNH PHỐ HÀ NỘI
+
+
+
+TÀI LIỆU PHÂN TÍCH NGHIỆP VỤ
+
+
+
+Hà nội – 2026
+ 
+
+
+
+
+Tổng quan
+Mục đích
+Phạm vi
+Tài liệu này được áp dụng trong phạm vi bài toán xây dựng Phần mềm đánh giá CBM được triển khai đồng bộ tại toàn bộ các đơn vị thuộc EVNHANOI, bao gồm các ban chuyên môn liên quan và các đơn vị trực thuộc Tổng công ty.
+Thuật ngữ và viết tắt
+Chức năng
+Quản lý yêu cầu (83)
+Giao diện
+
+
+Quy trình: từ màn hình Quản lý yêu cầu các đơn vị sẽ:
+Tạo các đầu việc 🡪 Add các thiết bị vào để đặt làm
+Hiện tại các đơn vị sẽ có quản lý thiết bị trên PMIS, sẽ có tất cả danh sách các trạm, chỉ cần chọn để đặt làm, sẽ link toàn bộ dữ liệu từ PMIS xuống phần mềm, các đơn vị X thì không có dữ liệu trên PMIS vì họ không quản lý thiết bị. Nên họ không thể tạo được yêu cầu này
+
+
+
+Hiện tại: Chu trình hiện tại là của các C (đơn vị điện lực) đã có các công trình trên PMIS, nếu các thiết bị không có trên PMIS, thì tạo giống công ty điện lực
+Quy trình của công ty điện lực như sau:
+1. Tạo vai trò cho chuyên viên và lãnh đạo các X (X8, X9, X10) trên ứng dụng web hiện trường (hiện tại đã có vai trò cho các C, X5, X6. X5 phải đóng vai các X tự đặt hàng chính mình xong có biên bản thì gửi BB giấy cho các X. 
+2. Do địa bản các X quản lý trên toàn bộ lưới điện EVN HN, --> chuyên viên X cần view được toàn bộ danh mục thiết bị trên PMIS, nếu thiết bị chưa có trên PMIS thì cần có chức năng tạo thêm thiết bị bên ngoài
+- Màn hình thông tin nút: Thêm trường lọc: Địa bàn (các phường thuộc EVNHN) Pmis có 12 C + X6
+3. Import excel: Làm chung cho các C và các X: Hiện trạng thì cho upload không có mã Thiết bị Pmis, bắt điều kiện vào tên trạm
+--> Mong muốn thêm cột Mã Pmis (mã VTTB) - Tham khảo X1: vì đối với thiết bị đã có trên PMIS có mã VTTB, còn thiết bị mới thì chưa có mã VTTB
+Yêu cầu
+Tạo vai trò cho chuyên viên và lãnh đạo các X (X8, X9, X10) trên ứng dụng web 
+Có chức năng quản lý yêu cầu giống hệt Điện lực để họ tự tạo không cần thông qua X5
+Màn hình thông tin nút
+
+Yêu cầu: Chọn thêm mới 🡪 Tại giao diện thông tin nút thêm trường: Địa điểm như sau:
+
+CBX Địa điểm gồm các giá trị sau: chỉ chọn 1 giá trị, chọn xong phần thông tin nút và VTTB sẽ lọc theo địa điểm user đã chọn
+Ba Đình
+Hoàn Kiếm
+Từ Liêm
+Hà Đông
+Thanh Trì
+Gia Lâm
+Đông Anh
+Sóc Sơn
+Sơn Tây
+Thạch Thất
+Thường Tín
+Ứng Hoà
+Công ty lưới điện cao thế (X06)
+Luồng ký duyệt
+Các acc của lãnh đạo vẫn tương tự các điện lực, không thay đổi
+Các luồng ký duyệt giống hệt các điện lực (C01)
+Quản lý biên bản (83.1)
+Vai trò
+Chỉ cần sửa cho giao diện Kiểm định viên
+Giao diện
+
+
+
+Hiện tại người dùng phải bấm vào lọc theo trạng thái Bị từ chối, sau đó xem chi tiết thì mới thấy.
+Yêu cầu
+
+Mục tiêu: 
+Ở tất cả các tab: thêm 1 icon ở cuối dòng: VD sau chữ “Học viện An Ninh” để người dùng biết có công việc bị từ chối
+Báo cáo nghiệm thu (84)
+Vai trò
+Tất cả vai trò được phân quyền
+Giao diện
+
+Hiện tại: Để lên được báo các nghiệm thu thì biên bản phải = hoàn thành
+Yêu cầu
+Phần tìm kiếm thêm filter: Trạng thái (giống filter trạng thái trong chức năng: Quản lý biên bản, trừ trạng thái “Đang thực hiện, bị từ chối, Hủy”): 
+
+Trạng thái gồm:
+Chờ duyệt cấp tổ đội
+Chờ duyệt cấp trung tâm
+Chờ duyệt cấp công ty
+Hoàn thành
+Mặc định: Hoàn thành
+Cho phép được chọn nhiều trạng thái
+Grid: Bổ sung cột trạng thái
+Xuất excel: Bổ sung cột trạng thái
+Xác nhận khối lượng công việc (85)
+Vai trò
+Chỉnh sửa cho điện lực
+Giao diện
+
+Yêu cầu
+Fix lỗi danh sách công việc bị trắng
+Đối với điện lực khi bấm vào xem chi tiết: tab danh sách công việc bị trắng, không hiển thị công việc
+Để xác định xem Yêu cầu nào có công việc: chọn Xem PDF  Sau đó chọn Xem chi tiết  tab Danh sách công việc
+
+Hiển thị đúng công việc sẽ có các thông tin giống kiểm định viên như sau:
+
+Bổ sung chữ ký số
+1. Hiển thị chữ ký số trong file PDF
+2. Hiện tại chỉ ký trên web: Trường hợp người ký không có tài khoản chữ ký số (trường hợp bên thi công) thì cho phép nhập tên người xác nhận, chức danh, cho dùng máy tính bảng để ký như ký hóa đơn trên máy bán hàng
+3. Giao diện ký số trên app như sau: 
+
+Quản lý thiết bị đi TN&KĐ ĐL, Quản lý biên bản (78)
+Giao diện
+
+Yêu cầu
+Thêm trường Đơn vị yêu cầu
+Chọn tài khoản Kiểm định viên 🡪 Trong chức năng: Quản lý biên bản 🡪 chọn sửa 🡪 Tab (2) Thiết bị thí nghiệm
+
+
+
+Yêu cầu: 
+Thêm “Cbx Đơn vị yêu cầu” trước cbx chọn thiết bị để Danh sách thiết bị lọc theo đơn vị đó, hiện tại danh sách thiết bị chỉ có thiết bị của X5 (Thiết bị này ở chức năng: thiết bị đi TN&KĐ)
+Đơn vị yêu cầu lấy từ chức năng Chức năng: Quản lý thiết bị đi TN&KĐ ĐL
+Cbx thiết bị: Hiển thị thêm các thiết bị theo đơn vị trong chức năng Quản lý thiết bị đi TN&KĐ ĐL
+
+Chỉnh sửa cbx thiết bị
+Giao diện:
+
+Yêu cầu: 
+Cho tìm kiếm nhanh bổ sung thêm “Số chế tạo”
+Nối thêm “ Số chế tạo” ở phía sau thiết bị
+Số chế tạo: nằm ở chức năng Quản lý thiết bị đi TN&KĐ ĐL & thiết bị đi TN&KĐ
+
+
+
+Quản lý thiết bị được TN&KĐ (70)
+Giao diện
+
+
+Yêu cầu
+Thêm hình tròn có màu giống màu của mức cảnh báo cao nhất kèm ngày đến hạn của thiết bị quá hạn lâu nhất ra ngoài màn danh sách. (Bao gồm Quản lý trạm, Cao áp, Trung áp và Hạ áp)
+
+Tạo QR code 
+Giao diện
+
+
+
+
+Yêu cầu
+Trong quá trình tạo biên bản sẽ chèn mã QR vào biên bản theo số biên bản
+1. Vào chức năng: Quản lý công việc: bấm tạo biên bản sinh ra mã QR --> Chức năng quản lý biên bản--> chọn xem PDF, hiển thị QR (số BB)
+2. Lãnh đạo Quét mã QR sẽ link tới đường link chỗ chia sẻ: Đường link lấy ở đây
+
+3. Cho phép quét = Camera và APP (để như zalo)
+App: để quét mã ở cạnh icon tìm kiếm
+A quang sẽ gửi lại mô tả mã QR ở đâu
+Quản lý mẫu (82)
+Giao diện
+
+
+Yêu cầu
+Thêm chức năng quản lý danh mục các trường dữ liệu dropdown (Các ô có dấu ) vào màn “Quản lý dữ liệu nhập biên bản” thành các tab tương tự “Tổ đầu dây”.
+Danh sách danh mục quản lý: 
+- Dòng điện định mức 
+- Điện áp định mức
+- Hãng sản xuất
+- Nước sản xuất
+- Dạng kiểm định
+- Điều kiện môi trường
+- Đơn vị đặt làm
+- Đơn vị sử dụng
+- Dạng thí nghiệm
+- Cơ sở sản xuất
+-TH đầu vào
+- TH đầu ra
+- Đèn chỉ thị
+- Tiết diện
+- Loại dầu
+- Lý do thí nghiệm
+- Kiểm tra bên ngoài
+Các tab hiển thị theo chiều dọc, có chức năng search tab
+
+Các cột hiển thị bao gồm:
+- Tên
+- Người tạo
+- Ngày tạo
+- Thao tác
+Quản lý bảng giá (81)
+Yêu cầu: Hiện tại phần mềm chỉ có tính năng áp giá trực tiếp, không có chức năng để quản lý bảng giá, cho phép người dùng có thể chỉnh sửa giá cũ, thêm giá mới cho VTTB
+Giá gồm 3 loại:
+Yêu cầu khách hàng (Loại phiếu = Yêu cầu khách hàng)
+Thí nghiệm công trình (Loại phiếu = VTTB theo công trình)
+Thí nghiệm định kỳ (Loại phiếu = VTTB không theo công trình)
+Tab YCKH
+Giao diện
+
+Tìm kiếm nhanh
+Cho phép tìm kiếm theo Mã áp giá, tên VTTB
+Info Icon (Tooltip): 
+
+Hiển thị Info Icon (i) bên trong ô tìm kiếm. Khi hover/click sẽ hiển thị hướng dẫn: "Hỗ trợ tìm kiếm theo Mã áp giá, Tên VTTB".
+Thêm mới
+
+Nhóm VTTB gồm:
+VTTB vận hành
+Thiết bị đo đếm nhóm 2
+Nếu mã áp giá + tên VTTB đã tồn tại  Cảnh báo “Mã áp giá và Tên VTTB đã tồn tại, vui lòng kiểm tra lại”
+Đơn giá phân cách bằng dấu “.”
+Import excel
+
+Template import:
+
+Sửa
+
+Xóa
+
+Xuất excel
+Xuất danh sách
+Tab thí nghiệm công trình
+Giao diện
+
+Quản lý yêu cầu (81 - thành)
+Chọn loại phiếu = YCKH
+Giao diện
+
+Yêu cầu
+Tại màn hình cập nhật HSĐC, thêm trường: “Đơn giá” cho phép hiển thị giá thiết bị quản lý trong chức năng quản lý bảng giá (Tab YCKH)
+Cho phép chỉnh sửa, khi in phiếu PDF sẽ hiển thị giá đã điều chỉnh áp dụng với bản ghi được chọn, việc cập nhật HSĐC không ảnh hưởng tới đơn giá
+VD: giá thiết bị = 750, người dùng chỉnh sửa = 900. Khi in PDF = đơn giá sẽ = 900* số lượng áp dụng với bản ghi hiện tại
+Quản lý BBKS (STT 66)
+Cho phép người dùng tạo BBKS theo công trình, 1 công trình có nhiều biên bản khảo sát, luồng ký duyệt từ cấp: Đơn vị công tác (X5)  Đơn vị tư vấn (nếu có)  Đơn vị QLVH (công ty điện lực)
+
+Menu
+Tên menu: Quản lý biên bản khảo sát
+Vị trí: Dưới chức năng quản lý yêu cầu
+Danh sách BBKS
+
+Tìm kiếm
+Tìm kiếm nhanh
+Số biên bản
+Tên biên bản
+Tên công trình
+Tìm kiếm nâng cao
+Loại biên bản:
+Đã lập PATC
+Chưa lập PATC
+Tên công trình
+Trạng thái: 
+Mới
+Chờ xác nhận
+Đã xác nhận
+Từ chối
+Ngày lập: từ ngày đến ngày
+Ngày xác nhận: từ ngày đến ngày
+Xem
+
+
+
+Thêm mới/sửa
+
+Tên công trình: chọn từ chức năng Quản lý công trình
+Thứ tự ký: cho phép được trùng STT ký, được gửi cho nhiều người cùng 1 lúc, khi tất cả mn ký xong thì sẽ gửi duyệt lên bước tiếp theo
+Lưu thêm mới/sửa
+Lưu: Check số biên bản là duy nhất, cảnh báo trùng “Số biên bản bị trùng, vui lòng kiểm tra lại”
+Sửa: Chỉ được sửa BBKS trạng thái = mới, từ chối. Sau khi sửa trạng thái = từ chối thì cập nhật lại trạng thái = Mới để người lập trình ký lại, lưu lại lịch sử duyệt để người dùng theo dõi
+Xoá
+
+Chỉ được xóa BBKS trạng thái = mới, trạng thái #mới thì ẩn icon xóa
+Xem pdf
+Cho phép xem BBKS dạng pdf
+Gửi duyệt
+
+
+Xem lịch sử duyệt
+
+Nếu có bản ghi bị từ chối thì hiển thị lý do 
+Xuất excel
+Xuất tất cả các trường thông tin trong giao diện danh sách, tên file đặt = “Danh sách BB khảo sát”
+Xác nhận
+Cho phép Xác nhận từng bản ghi và check chọn duyệt nhiều bản ghi, Xác nhận thành công gắn chữ ký của người xác nhận đúng vị trí
+
+Từ chối
+Cho phép từ chối từng bản ghi và check chọn từ chối nhiều bản ghi
+
+Hiển thị lý do trong phần xem lịch sử duyệt
+Lập PATC
+Cho phép tích chọn nhiều BBKS, khi bấm vào Button Lập PATC check các điều kiện sau:
+1. Tất cả BBKS phải cùng 1 công trình, nếu khác công trình cảnh báo: “Biên bản khảo sát đã chọn không cùng 1 công trình, vui lòng kiểm tra lại”, không cho tạo PATC
+2.BBKS phải ở trạng thái = đã duyệt, nếu có ít nhất 1 BBKS trạng thái khác cảnh báo: “Biên bản khảo sát cần được duyệt trước khi lập PATC, vui lòng kiểm tra lại”, không cho tạo PATC
+ Đủ điều kiện 1 & 2, gọi tới màn hình Thêm mới PATC trong mục 2.12, gắn các BBKS đã chọn tích sẵn cùng file BBKS pdf, người dùng có thể tích lại hoặc bỏ tích
+Quản lý PATC (STT 66)
+Cho phép người dùng lập PATC từ nhiều BBKS theo công trình, điều kiện các BBKS cần phải ở trạng thái đã duyệt
+Luồng ký: X5 lập PATC gửi lên đội --> đội duyệt --> trung tâm --> phòng KTCN và bộ phận an toàn (của X5) --> gửi về giám đốc X5 (đồng thời cả tờ bìa) --> Gửi sang công ty điện lực (ký tờ bìa)  TP tham gia của điện lực  Giám đốc của ĐL xác nhận
+
+
+Menu
+Tên menu: Quản lý phương án thi công
+Vị trí: Dưới chức năng quản lý biên bản khảo sát
+Danh sách PATC
+
+Mục thao tác: cho vào dấu 3 chấm 
+
+Tìm kiếm
+Tìm kiếm nhanh
+Số PATC
+Tên PATC
+Tên công trình
+Tìm kiếm nâng cao
+Tên công trình
+Trạng thái: 
+Tất cả trạng thái
+Ngày lập: từ ngày đến ngày
+Ngày xác nhận: từ ngày đến ngày
+
+Xem
+
+Thêm mới/Sửa
+
+Danh sách bb khảo sát lọc theo công trình trong PATC, trạng thái #đã duyệt thì không cho tích chọn, chỉ tích trạng thái bb = đã duyệt
+1 công trình được lập nhiều PATC
+Xóa
+Xem pdf
+Gửi duyệt
+Người lập xong trạng thái = mới, gửi duyệt cấp tổ đội sẽ cập nhật trạng thái: Chờ duyệt cấp tổ   Tổ duyệt: trạng thái = chờ duyệt cấp trung tâm  gửi trung tâm duyệt
+Quy tắc trạng thái: Gửi + chức vụ + xác nhận, trạng thái cuối cùng PATC = Đã xác nhận
+Xem lịch sử duyệt
+Xuất excel
+Tải xuống
+Tải tất cả các file đính kèm
+Xác nhận
+Từ chối
+ĐK công tác
+Đăng ký công tác (STT 67)
+Danh sách
+
+Tìm kiếm
+Tìm kiếm nhanh: tìm theo tất cả các text trong danh sách
+Tìm kiếm nâng cao: Tên công trình, đơn vị QLVH, người lập, người xác nhận, ngày lập, ngày xác nhận, trạng thái
+Thêm mới
+Cách 1: Trong danh sách PATC: có icon thêm mới ĐKCT gọi tới màn hình thêm mới đăng ký công tác: fill sẵn các thông tin từ PATC đã có, đính kèm file, cho người dùng tải lên file khác (nếu có)
+Cách 2: Chọn thêm mới từ danh sách ĐKCTKC
+1 PATC được đăng ký nhiều phiếu ĐKCT
+
+Xem
+
+Sửa
+
+Chỉ được sửa ở trạng thái = Mới, từ chối
+Xóa
+Chỉ được xóa trạng thái = mới
+Xuất excel
+Duyệt
+Từ chối
+Trạng thái
+Mới
+Chờ xác nhận: Trong biên bản sẽ có rất nhiều trạng thái chờ xác nhận khác nhau, như chờ kiểm định viên xác nhận, chờ trung tâm xác nhận  Trên app sẽ gom hết vào tab: chờ xác nhận
+Đã xác nhận
+Từ chối
+Quản lý tiêu chí đánh giá
+Danh sách
+
+Thêm/sửa
+
+Tìm kiếm
+Tìm kiếm nhanh theo tên, ghi chú
+Xóa (deactive)
+Xuất excel
+Quản lý biên bản khảo sát APP
+Chức năng này chỉ để trình ký, theo dõi, còn việc thêm mới/ chỉnh sửa: thực hiện trên web
+Danh sách
+
+Gồm các tab:
+Tất cả: gồm tất cả trạng thái
+Mới: chỉ trạng thái mới lập (lập trên web, app chỉ xem)
+Bị từ chối
+Chờ xác nhận
+Đã xác nhận
+Xóa
+Xử lý thông báo xác nhận giống luồng của chức năng: DS phiếu xác nhận KLCV
+Tìm kiếm 
+Tìm kiếm nhanh: 
+tìm theo số biên bản, tên công trình
+Tìm kiếm nâng cao
+Loại biên bản:
+Đã lập PATC
+Chưa lập PATC
+Tên công trình
+Trạng thái: 
+Mới
+Chờ xác nhận
+Đã xác nhận
+Từ chối
+Ngày lập: từ ngày đến ngày
+Ngày xác nhận: từ ngày đến ngày
+Gửi xác nhận
+Xử lý thông báo xác nhận giống luồng của chức năng: DS phiếu xác nhận KLCV
+Trên web đã có khai báo người nhận phiếu, trên app chỉ cần gửi xác nhận tới người đó
+Xuất PDF
+Xuất PDF giống chức năng: Ds phiếu xác nhận KLCV
+Nếu có nhiều file thì khi bấm xuất pdf: mỗi file sẽ hiển thị ở 1 tab (giống khi bấm vào gửi duyệt ở chức năng DS biên bản)
+Xác nhận
+Người có quyền Xác nhận/từ chối sẽ hiển thị button xác nhận
+Khi bấm xác nhận: Xử lý thông báo xác nhận giống luồng của chức năng: DS phiếu xác nhận KLCV
+
+
+Từ chối
+
+Người có quyền Xác nhận/từ chối sẽ hiển thị button xác nhận
+Khi bấm Từ chối: Xử lý thông báo xác nhận giống luồng của chức năng: DS phiếu xác nhận KLCV
+
+Quản lý phương án thi công APP
+
+Chức năng so sánh kết quả thí nghiệm lịch sử
+1. Hoàn thiện bộ hồ sơ sức khỏe của 68 trạm 110kv: X6
+- MBA, Cầu dao, TU, TI, MC và các thiết bị tủ xuất tuyến
+2. Khi bấm vào các thiết bị sẽ có màn hình theo dõi sức khỏe
+- Thông số xuất xưởng
+- Thông số của các lần đo
++ Thông số dựa theo biên bản
++ Lựa chọn xem được theo nhiều tiêu chí khác nhau
+Note: Trong chức năng quản lý biên bản đã: phân theo trạm, ngăn lộ, thiết bị (bấm vào xem chi tiết để lấy được mã thiết bị)
+Chức năng import các file kết quả đo từ thiết bị thí nghiệm APP
+1.	Chức năng: Danh sách biên bản => Lọc biên bản = đang thực hiện => Sửa biên bản => Tab: Hạng mục kiểm tra => tất cả các hạng mục 1, 2, 3, 4, vv (tại tất cả các đầu mục nhỏ): 
+-	Thêm button Chọn file: Cho phép người dùng tải đính kèm nhiều file, cho phép định dạng: pdf, word, excel, ảnh
+2.	Loại TB cần thêm gồm:
+-	MBA
+-	Máy cắt
+-	Cầu dao phụ tải
+-	TI
+-	TU
+-	Cáp lực
+-	Cáp đường dây
+Chức năng import các file kết quả đo từ thiết bị thí nghiệm WEB
+- Cho phép import file kết quả đo vào phần mềm, thay vì người dùng phải tự nhập kết quả vào biên bản thì import kết quả vào hệ thống và đọc tự động điền vào biên bản : Yêu cầu dữ liệu xuất ra từ phần mềm phải theo định dạng cố định (ưu tiên XML --> Excel)
+- Ưu tiên đọc kqua từ phần mềm PTM hãng omicron cho các thiết bị
++ MBA 110, 220kv
++ Máy cắt trong trạm biến áp 110kv, 220kv
+Nhà thầu cần khảo sát thêm để làm rõ các trường thông tin mapping giữa file kết quả và form nhập biên bản
+
+Dashboard
+
+
+
+
+
+Làm màn hình Dashboard theo dõi công tác thí nghiệm, kiểm định gồm các tiêu chí sau:
+- Công việc
+- Biên bản
+- Các dạng thí nghiệm từ các yêu cầu
+- Tỷ trọng thực hiện/giám sát
+- Danh sách tổ đội
+Chức năng đính kèm file APP
+Chức năng: Danh sách biên bản  Lọc biên bản = đang thực hiện  Sửa biên bản  Tab: Hạng mục kiểm tra  tất cả các hạng mục 1, 2, 3, 4, vv (tại tất cả các đầu mục nhỏ): 
+Thêm button Chọn file: Cho phép người dùng tải đính kèm nhiều file, cho phép định dạng: pdf, word, excel, ảnh
+Loại TB cần thêm gồm:
+MBA
+Máy cắt
+Cầu dao phụ tải
+TI
+TU
+Cáp lực
+Cáp đường dây
+Chức năng đính kèm file WEB
+Cho phép đính kèm file khi nhập biên bản thí nghiệm, kiểm định WEB + APP
+Cho phép người dùng upload file đính kèm tất cả định dạng (Word, excel, pdf, png, ảnh) vào hạng mục kiểm tra trong quản lý biên bản, tất cả các hạng mục 1, 2, 3, 4, vv (tại tất cả các đầu mục nhỏ): 
+Thêm button Chọn file: Cho phép người dùng tải đính kèm nhiều file, cho phép định dạng: pdf, word, excel, ảnh
+Loại TB cần thêm gồm:
+- MBA
+- Máy cắt
+- Cầu dao phụ tải
+- TI
+-TU
+- Cáp lực
+- Cáp đường dây
+Chức năng gắn định vị người dùng WEB
+Tại thời điểm nhập biên bản ngoài hiện trường, khi Lưu thì sẽ lấy tọa độ Lat, long vị trí của thiết bị, xem trên web
+- Chức năng Quản lý biên bản: bổ sung icon xem vị trí, có thể xem được lịch sử tạo biên bản tại đâu, cập nhật biên bản tại đâu
+Note: Trường hợp người dùng sửa biên bản trên web thì ẩn nút xem tọa độ
+
+Bấm xem vị trí hiển thị popup: tọa độ lấy chính xác từ 8-12 số sau số thập phân
+
+Bấm xem vị trí chi tiết: hiển thị map
+
+Chức năng gắn định vị người dùng APP
+Chức năng: Quản lý biên bản
+yêu cầu: sửa biên bản --> khi Lưu thì sẽ lấy tọa độ Lat, long để người dùng hiển thị được vị trí xem trên web.
+1. Khi vào app, thông báo xin cấp quyền vị trí
+2. Khi Lưu biên bản check:
+- Nếu thiết bị đã bật GPS, khi lưu sẽ tự động lấy tọa độ của thiết bị (Lưu thêm mới + Lưu sửa), mỗi lần lưu thì đều lấy tọa độ GPS để lưu lại lịch sử vị trí
+- Nếu thiết bị chưa bật định vị GPS, khi bấm lưu sẽ hiển thị popup thông báo bật định vị, nếu người dùng cố tình không bật thì vẫn cho lưu bình thường
+- Trường hợp bật định vị nhưng không thể lấy được vị trí thì vẫn cho user lưu bình thường
+3. Thời gian chờ lấy GPS khi bấm Lưu: 3 giây
+4. Kiểm tra app đã bật vị trí và cho phép định vị, nếu tắt 1 trong 2 sẽ có popup hỏi cấp phép

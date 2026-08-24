@@ -1,0 +1,325 @@
+// @dart=2.9
+import 'package:evnmobile/src/htld/common/utils/alert_dialog_utils.dart';
+import 'package:evnmobile/src/htld/common/utils/connection.dart';
+import 'package:evnmobile/src/htld/common/utils/snack_bar_h_u_d.dart';
+import 'package:evnmobile/src/htld/models/popups_data_model.dart';
+import 'package:evnmobile/src/htld/screens/grid_management/distribution_substation/day/popups/substation_room.dart';
+import 'package:evnmobile/src/htld/screens/grid_management/medium_voltage_line/incident/popups/line_incident_poles_popup.dart';
+import 'package:evnmobile/src/htld/services/offline_service/local_data_manager.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../../models/day_night/popups/fall_of_fuses.dart';
+import '../../../containers/e_drop_down.dart';
+import '../../../containers/e_text_area.dart';
+
+class FallOffFusesController extends BasePopupController {
+  Rx<FallOfFuses> model = FallOfFuses().obs;
+
+  String endPoint = 'fall-off-fuses';
+
+  @override
+  void onInit() {
+    super.onInit();
+    createDefaultIfNeeded();
+  }
+
+  @override
+  void refresh() {
+    model.refresh();
+    super.refresh();
+  }
+
+  @override
+  Future getData() async {
+    await super.getData();
+    final isConnectInternet = await Connection.shared.checkConnection();
+
+    if (!isConnectInternet) {
+      await getOffine(ticketController.ticketID);
+    } else {
+      // To do : check update time between LocalData and ServerData
+      final response = await repository.getFallOffFuses(
+          ticketController.ticketID, popupsDataModel.equipmentId, endPoint);
+
+      if (response.isLoadSuccess) {
+        model.value = response?.data ?? FallOfFuses();
+        model.value.title = popupsDataModel.getPopupName();
+        createDefaultIfNeeded();
+        update();
+      } else {
+        await showDialogError(response.message);
+      }
+    }
+  }
+
+  @override
+  Future updateData() async {
+    final isConnectInternet = await Connection.shared.checkConnection();
+
+    if (!isConnectInternet) {
+      if (!validateAllData(model.value)) {
+        await showDialogValidateData();
+        model.refresh();
+        return;
+      }
+      final params = {
+        'equipmentId': popupsDataModel.equipmentId,
+        'fallOffFuses': model.value.toJson()
+      };
+      await updateOffine(params, ticketController.ticketID);
+      Get.back(result: true);
+    } else {
+      if (!validateAllData(model.value)) {
+        await showDialogValidateData();
+        model.refresh();
+        return;
+      }
+      final params = {
+        'equipmentId': popupsDataModel.equipmentId,
+        'fallOffFuses': model.value.toJson()
+      };
+      await updateOffine(params, ticketController.ticketID);
+      final response = await repository.updatePopup(
+          ticketController.ticketID, endPoint, params);
+
+      if (response.isLoadSuccess) {
+        Get.back(result: true);
+        SnackBarHUD.show(response.message);
+      } else {
+        await showDialogError(response.message);
+      }
+    }
+  }
+
+  Future<void> updateOffine(Map<String, dynamic> data, String ticketId) async {
+    await LocalDataManager.shared
+        .savePopup(endPoint, data, ticketId, popupsDataModel: popupsDataModel);
+  }
+
+  Future<void> getOffine(String ticketId) async {
+    final data = await LocalDataManager.shared
+        .getPopup(ticketId, equipmentId: popupsDataModel.equipmentId);
+    model.value = FallOfFuses.fromJson(data['fallOffFuses']);
+    model.value.title = popupsDataModel.getPopupName();
+  }
+
+  void createDefaultIfNeeded() {
+    // model.value.insulation ??= BTNVCPBOptions.first.value;
+    // model.value.fuseHolder ??= BTTCNPDptions.first.value;
+    // model.value.bolts ??= BTOptions.first.value;
+    // model.value.sound ??= BTBTDPDOptions.first.value;
+    // model.value.joint ??= BTOptions.first.value;
+    // model.value.handleActionLock ??= BTOptions.first.value;
+    // model.value.possibleProblematic ??= KCOptions.first.value;
+    // model.value.handlingInCheck ??= KCOptions.first.value;
+  }
+}
+
+class FallOffFusesPopup extends BasePopupWidget {
+  FallOffFusesPopup({@required PopupsDataModel popupsDataModel}) {
+    _controller.popupsDataModel = popupsDataModel;
+    Future.delayed(const Duration(milliseconds: 200), _controller.getData);
+  }
+
+  static String endPoint = 'fall-off-fuses';
+  final FallOffFusesController _controller = FallOffFusesController();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Obx(() => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              EDropDown(CKOptions,
+                  index: 0,
+                  enable: _controller.popupsDataModel.isAllowEdit,
+                  onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                    _controller.setAbnormal(
+                        categoryName, _controller.model.value, abnormal, index);
+                  },
+                  images: _controller.model.value.images,
+                  onAttachImages: (images, index) {
+                    _controller.model.value.setImages(images, index);
+                  }),
+              EDropDown(
+                BTNVCPBOptions,
+                title: 'Cách điện:',
+                index: 1,
+                defaultValue: _controller.model.value.insulation,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.insulation = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                BTTCNPDNAOptions,
+                title: 'Cầu giữ chì:',
+                index: 2,
+                defaultValue: _controller.model.value.fuseHolder,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.fuseHolder = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                BTNAOptions,
+                title: 'Bu lông: ',
+                index: 3,
+                defaultValue: _controller.model.value.bolts,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.bolts = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                BTBTDPDNAOptions,
+                title: 'Tiếng kêu: ',
+                index: 4,
+                defaultValue: _controller.model.value.sound,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.sound = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                BTNAOptions,
+                title: 'Mối nối:',
+                index: 5,
+                defaultValue: _controller.model.value.joint,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.joint = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                BTNAOptions,
+                title: 'Khóa thao tác của cần thao tác: ',
+                index: 6,
+                defaultValue: _controller.model.value.handleActionLock,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.handleActionLock = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              ETextArea(
+                title: 'Các hiện tượng cụ thể: ',
+                value: _controller.model.value.getSpecificPhenomena(),
+                enable: _controller.popupsDataModel.isAllowEdit,
+                isRequire: true,
+                onChange: (value) {
+                  _controller.model.value.specificPhenomena = value;
+                },
+              ),
+              EDropDown(
+                KCOptions,
+                title: 'Có khả năng gây sự cố: ',
+                index: 7,
+                defaultValue: _controller.model.value.possibleProblematic,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  _controller.setAbnormal(
+                      categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.possibleProblematic = option.value;
+                  _controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              EDropDown(
+                KCOptions,
+                title: 'Xử lý ngay trong kiểm tra:  ',
+                index: 8,
+                defaultValue: _controller.model.value.handlingInCheck,
+                enable: _controller.popupsDataModel.isAllowEdit,
+                onSelectedAbnormalOption: (categoryName, abnormal, index) {
+                  // _controller.setAbnormal(
+                  //     categoryName, _controller.model.value, abnormal, index);
+                },
+                images: _controller.model.value.images,
+                onChange: (option, mess) {
+                  _controller.model.value.handlingInCheck = option.value;
+                  //_controller.model.value.setUnusually(mess);
+                },
+                onAttachImages: (images, index) {
+                  _controller.model.value.setImages(images, index);
+                },
+              ),
+              ETextArea(
+                title: 'Đề xuất xử lý bất thường/ hư hỏng:',
+                value: _controller.model.value.getSuggestedHandlingOfAbnormal(),
+                enable: _controller.popupsDataModel.isAllowEdit,
+                isRequire: true,
+                onChange: (value) {
+                  _controller.model.value.suggestedHandlingOfAbnormal = value;
+                },
+              ),
+            ],
+          )),
+    );
+  }
+
+  @override
+  void saveData() {
+    _controller.updateData();
+  }
+}
+

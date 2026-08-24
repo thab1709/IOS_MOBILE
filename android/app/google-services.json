@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "536229882292",
+    "project_id": "evn-hanoi",
+    "storage_bucket": "evn-hanoi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536229882292:android:a6b1432b613c6e19e7aae1",
+        "android_client_info": {
+          "package_name": "com.evn.pmis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536229882292-qlf4v03vk2fld280do782smaj0q987fh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh9GHrpvV9v6oP-khMUfyMZ9WM8EjgAlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536229882292-qlf4v03vk2fld280do782smaj0q987fh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536229882292-p9ss1ga5jv1ntbdr0j3cuta5alav7o0k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.evn.pmis"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536229882292:android:dfaa6010cb8a5067e7aae1",
+        "android_client_info": {
+          "package_name": "com.example.evnmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536229882292-qlf4v03vk2fld280do782smaj0q987fh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh9GHrpvV9v6oP-khMUfyMZ9WM8EjgAlc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536229882292-qlf4v03vk2fld280do782smaj0q987fh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536229882292-p9ss1ga5jv1ntbdr0j3cuta5alav7o0k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.evn.pmis"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

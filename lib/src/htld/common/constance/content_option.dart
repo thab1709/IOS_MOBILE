@@ -1,0 +1,76 @@
+// @dart=2.9
+
+import 'package:evnmobile/src/htld/common/constance/strings.dart';
+import 'package:evnmobile/src/htld/models/option_model.dart';
+
+class ContentOptions {
+  static final normal = OptionModel(AppStrings.optionNormal, 1);                //Bình thường
+  static final weirdo = OptionModel(AppStrings.optionWeirdo, 2);                //Bất thường
+  static final oilSpill = OptionModel('Chảy dầu', 3);                           //Chảy dầu
+  static final good = OptionModel(AppStrings.optionGood, 4);                    //Tốt
+  static final lack = OptionModel(AppStrings.optionLack, 5);                    //Thiếu
+  static final enough = OptionModel(AppStrings.optionEnough, 6);                //Đủ
+  static final bad = OptionModel(AppStrings.optionBad, 7);                      //Xấu
+  static final rift = OptionModel(AppStrings.optionRift, 8);                    //Rạn nứt
+  static final dirty = OptionModel(AppStrings.optionDirty, 9);                  //Bẩn
+  static final discharge = OptionModel(AppStrings.optionDischarge, 10);         //Phóng điện
+  static final yes = OptionModel(AppStrings.optionYes, 11);                     // Có
+  static final no = OptionModel(AppStrings.optionNo, 12);                       //Không
+  static final closed = OptionModel(AppStrings.optionClosed, 13);               //Đóng
+  static final cut = OptionModel(AppStrings.optionCut, 14);                     // Cắt
+  static final discolored = OptionModel(AppStrings.optionDiscolored, 15);       //Nóng đỏ, đổi màu
+  static final open = OptionModel(AppStrings.optionOpen, 16);                   //Mở
+  static final original = OptionModel(AppStrings.optionOriginal, 17);           //Nguyên vẹn
+  static final rusty = OptionModel(AppStrings.optionRusty, 18);                 //Gỉ
+  static final punctured = OptionModel(AppStrings.optionPunctured, 19);         //Thủng
+  static final cracked = OptionModel(AppStrings.optionCracked, 20);             //Nứt
+  static final broken = OptionModel(AppStrings.optionBroken, 21);               //Vỡ
+  static final warping = OptionModel(AppStrings.optionWarping, 22);             //Cong vênh
+  static final difficultToManipulate = OptionModel(AppStrings.optionDifficultToManipulate, 23);      //Khó thao tác
+  static final loose = OptionModel(AppStrings.optionLoose, 24);                 //Lỏng
+  static final electricalLeakageSound  = OptionModel(AppStrings.optionElectricalLeakageSound, 25);  //Có tiếng kêu do phóng điện bề mặt
+  static final fiberForm = OptionModel(AppStrings.optionFiberForm, 26);         //Tưa
+  static final brokenWire = OptionModel(AppStrings.optionBrokenWire, 27);       //Đứt
+  static final fire = OptionModel(AppStrings.optionFire, 28);                   //Cháy
+  static final fit = OptionModel(AppStrings.optionFit, 29);                     //Phù hợp
+  static final inappropriate  = OptionModel(AppStrings.optionInappropriate, 30);  //Không phù hợp
+  static final outOfGas  = OptionModel(AppStrings.optionOutOfGas, 31);          //Hết khí
+  static final damaged  = OptionModel(AppStrings.optionDamaged, 32);            //Hư hỏng
+  static final blistering  = OptionModel(AppStrings.optionBlistering, 33);      //Phồng rộp
+  static final melasma  = OptionModel(AppStrings.optionMelasma, 34);  //Nám
+  static final abnormalitiesDischarge  = OptionModel(AppStrings.optionAbnormalitiesDischarge, 35);  //Bất thường do phóng điện
+  static final colorChange  = OptionModel(AppStrings.optionColorChange, 36);  //Đổi màu
+  static final heatGeneration = OptionModel(AppStrings.optionHeatGeneration, 37);  //Phát nhiệt
+  static final brokenSegment = OptionModel(AppStrings.optionBrokenSegment, 38);  //Gãy
+  static final inclined = OptionModel(AppStrings.optionInclined, 39);  //Nghiêng
+  static final peelOffTheYeast = OptionModel(AppStrings.optionPeelOffTheYeast, 40);  //Tróc men
+  static final differrence = OptionModel(AppStrings.optionDifferrence, 41);  //Lệch
+  static final winding = OptionModel(AppStrings.optionWinding, 42);  //Uốn khúc
+  static final fallingTheLatch  = OptionModel(AppStrings.optionFallingTheLatch, 43);  //Rơi chốt
+  static final failure  = OptionModel(AppStrings.optionFailure, 44);  //Hỏng
+  static final spit_it_out_of_the_ground   = OptionModel('Nhô lên khỏi mặt đất', 45);  //Nhô lên khỏi mặt đất
+  static final isChanged = OptionModel('Thay đổi', 46);  //Thay đổi
+  static final rust = OptionModel('Gỉ sét', 47); //Gỉ sét
+  static final clean = OptionModel('Sạch', 48);  // Sạch
+  static final notOriginal  = OptionModel('Không nguyên vẹn', 49);  //Không nguyên vẹn
+  static final punk  = OptionModel('Mục', 50);  //Mục
+  static final deformation  = OptionModel('Biến dạng', 51);  //Biến dạng
+  static final subsidence  = OptionModel('Lún', 52);  //Lún
+  static final slack  = OptionModel('Chùng', 53);  //Chùng
+  static final hollow  = OptionModel('Hở', 54);  //Hở
+  static final private  = OptionModel('Kín', 55);  //Kín
+  static final wrongPosition  = OptionModel('Sai vị trí', 56);  //Sai vị trí
+  static final fireNam = OptionModel('Cháy nám', 57);  //Cháy nám
+  static final electricSparkDischarge = OptionModel('Phóng tia lửa điện', 58);  //Phóng tia lửa điện
+  static final rustOil = OptionModel('Gỉ dầu', 59); //Gỉ dầu
+  static final abnormalitiesDischargeAlongInsulation = OptionModel('Bất thường do phóng điện bề mặt dọc cách điện', 60); //Bất thường do phóng điện bề mặt dọc cắt điện
+  static final fireSem = OptionModel('Cháy sém', 61);  //Cháy sém
+  static final notNormal = OptionModel('Không bình thường', 62); //Không bình thường
+  static final warpingOp = OptionModel('Cong', 63);  //Cong
+  static final crackedBroken = OptionModel('Nứt vỡ', 64);  //Nứt vỡ
+  static final notExist = OptionModel('Không hiện hữu', 65);  //Không hiện hữu
+  static final noOil = OptionModel('Không có dầu', 76);  //Ko có dầu
+  static final absorbOil = OptionModel('Thấm dầu', 77);  //thấm dầu
+  static final hotRed  = OptionModel(AppStrings.optionHotRed, 999);  //Nóng đỏ chuyển màu
+  static final na = OptionModel('N/A', 1000);
+}
