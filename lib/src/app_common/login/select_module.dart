@@ -1,4 +1,4 @@
-// @dart=2.9
+﻿// @dart=2.9
 import 'dart:async';
 
 import 'package:evnmobile/app_env.dart';
@@ -86,24 +86,24 @@ class _SelectModuleScreenState extends State<SelectModuleScreen> {
                       () {
                     AppShared.instance.persistentAppType(AppType.KDTN);
                     Get.toNamed(Routes.login);
-                  }, const Color(0xff008000)),
+                  }, [const Color(0xFF4CAF50), const Color(0xFF2E7D32)]),
                   _buildItem(
                       ImagesCommon.icHighElectric, StringsCommon.moduleName3,
                       () async {
                     await AppShared.instance.persistentAppType(AppType.HTDCT);
                     await Get.toNamed(Routes.login);
                     // Get.toNamed(Routes.homeDCT);
-                  }, const Color(0xff1F59DE)),
+                  }, [const Color(0xFF42A5F5), const Color(0xFF1565C0)], hasSparkle: true),
                   _buildItem(ImagesCommon.icElectric, StringsCommon.moduleName2,
                       () {
                     AppShared.instance.persistentAppType(AppType.HTLDTT);
                     Get.toNamed(Routes.login);
-                  }, const Color(0xff7F15D1)),
+                  }, [const Color(0xFFAB47BC), const Color(0xFF6A1B9A)], hasSparkle: true),
                   _buildItem(ImagesCommon.icElectric, StringsCommon.moduleName4,
                       () {
                     AppShared.instance.persistentAppType(AppType.HTLDHT);
                     Get.toNamed(Routes.login);
-                  }, Color.fromARGB(255, 184, 8, 178)),
+                  }, [const Color(0xFFEC407A), const Color(0xFFAD1457)], hasSparkle: true),
                 ],
               ),
             ),
@@ -114,7 +114,7 @@ class _SelectModuleScreenState extends State<SelectModuleScreen> {
   }
 
   Widget _buildItem(
-      String icon, String title, Function() onTap, Color bgColor) {
+      String icon, String title, Function() onTap, List<Color> gradientColors, {bool hasSparkle = false}) {
     var marginVertical = 10.0;
     var marginHorizontal = 10.0;
     final isLargeScreenSize = Get.size.width >= 600;
@@ -127,9 +127,26 @@ class _SelectModuleScreenState extends State<SelectModuleScreen> {
       child: Container(
         margin: EdgeInsets.symmetric(
             vertical: marginVertical, horizontal: marginHorizontal),
-        child: Card(
-          color: bgColor,
-          child: Container(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: gradientColors,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Stack(
+            children: [
+              Container(
             padding: EdgeInsets.symmetric(
                 vertical: isLargeScreenSize ? 20 : 16,
                 horizontal: isLargeScreenSize ? 20 : 12),
@@ -146,7 +163,7 @@ class _SelectModuleScreenState extends State<SelectModuleScreen> {
                   title ?? '',
                   style: const TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white),
                 )),
                 Padding(
@@ -159,9 +176,25 @@ class _SelectModuleScreenState extends State<SelectModuleScreen> {
               ],
             ),
           ),
-        ),
+          if (hasSparkle)
+            const Positioned(
+              top: 0,
+              right: 15,
+              child: Text('✨⚡️',
+                style: TextStyle(fontSize: 26, shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.yellow,
+                    offset: Offset(0, 0),
+                  ),
+                ]),
+              ),
+            ),
+        ],
       ),
-    );
+    ),
+  ),
+);
   }
 }
 
