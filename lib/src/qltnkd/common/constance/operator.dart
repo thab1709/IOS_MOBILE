@@ -11,8 +11,10 @@ class OperatorType {
   static const maxMinAve200 =
       5; //((Max// (A,B,C) – Min(A,B,C))/Average(A+B+C)*200
   static const aSubBDivBMulti100 = 6; //((A-B)/B)*100
-  static const deviation =
-      7; //% (Điện dung đo được - Điện dung định mức) /  Điện dung định mức) * 100
+    static const deviation =
+      7; //% (Điện dung đo đạc - Điện dung định mức) /  Điện dung định mức) * 100
+  static const maxSubMin = 8; //Max(A,B,C) - Min(A,B,C)
+  static const aDivBMulti100 = 9; //(A/B)*100
 
 }
 
@@ -37,8 +39,14 @@ String operatorCalculator(int operatorType,
     case OperatorType.maxMinAve200:
       return maxMinAve200(a, b, c);
       break;
-    case OperatorType.aSubBDivBMulti100:
+        case OperatorType.aSubBDivBMulti100:
       return aSubBDivBMulti100(a, b);
+      break;
+    case OperatorType.maxSubMin:
+      return maxSubMin(a, b, c);
+      break;
+    case OperatorType.aDivBMulti100:
+      return aDivBMulti100(a, b);
       break;
     default:
       return '';
@@ -186,3 +194,35 @@ String aSubBDivBMulti100(String a, String b) {
   }
 }
 
+
+String maxSubMin(String a, String b, String c) {
+  final numA = a.toDoubleOrNull();
+  final numB = b.toDoubleOrNull();
+  final numC = c.toDoubleOrNull();
+
+  if (numA == null || numB == null || numC == null) {
+    return '';
+  }
+
+  if (numA >= 0 && numB >= 0 && numC >= 0) {
+    final result = math.max<double>(math.max<double>(numA, numB), numC) -
+            math.min<double>(math.min<double>(numA, numB), numC);
+    return formatData(result);
+  } else {
+    return '0';
+  }
+}
+
+String aDivBMulti100(String a, String b) {
+  final numA = a.toDoubleOrNull();
+  final numB = b.toDoubleOrNull();
+  if (numA == null || numB == null) {
+    return '';
+  }
+  if (numA >= 0 && numB >= 0 && numB != 0) {
+    final result = (numA / numB) * 100;
+    return formatData(result);
+  } else {
+    return '0';
+  }
+}
