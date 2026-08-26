@@ -235,8 +235,11 @@ class WorkByTransformerController extends GetxController {
         reportWorkItems.addAll(response.data.list);
         final totalPages = response.data.paging.totalPages;
 
-        // Giới hạn load tối đa 5 trang đầu tiên để tránh bị treo app/backend do gửi quá nhiều request cùng lúc
-          final maxInitialPages = totalPages > 5 ? 5 : totalPages;
+        final bool noDateFilter = fromDate == null || fromDate.isEmpty || toDate == null || toDate.isEmpty;
+        final isForX = workGroupType.value == 1;
+        // Riêng cho công việc Xây lắp (isForX), nếu bỏ lọc ngày thì load toàn bộ trang.
+        // Các loại công việc khác (như TNĐK) chỉ tải tối đa 5 trang để tránh quá tải backend.
+        final maxInitialPages = (isForX && noDateFilter) ? totalPages : (totalPages > 5 ? 5 : totalPages);
         if (maxInitialPages > 1) {
           final futures = <Future<List<ReportWorkItem>>>[];
           for (int i = 2; i <= maxInitialPages; i++) {
