@@ -1,3 +1,5 @@
+import 'package:evnmobile/src/qltnkd/screens/verification_report/report/report_controller.dart';
+import 'package:get/get.dart';
 // @dart=2.9
 import 'dart:async';
 import 'dart:convert';
@@ -361,15 +363,24 @@ class FieldModel {
     fieldModels.forEach((element) async {
       if (element.fieldFormula != null &&
           element.fieldType != FieldType.radioButton) {
-        final params = element.fieldFormula.split(',');
+        final params = element.fieldFormula.split(',').map((e) => e.trim()).toList();
         final values = <String>[null, null, null, null];
         params.forEachIndexed((index, par) {
-          final valueField = fieldModels.firstWhere((e) => e.fieldName == par,
+          var valueField = fieldModels.firstWhere((e) => e.fieldName == par,
               orElse: () => null);
+          if (valueField == null) {
+            try {
+              if (Get.isRegistered<ReportController>()) {
+                final reportController = Get.find<ReportController>();
+                valueField = reportController.findFieldByName(
+                    reportController.reportModel?.value?.fieldsModel, par);
+              }
+            } catch (e) {}
+          }
           if (valueField != null) {
-            values.insert(index, valueField?.value ?? '');
+            if (index < 4) values[index] = valueField?.value ?? '';
           } else {
-            values.insert(index, '');
+            if (index < 4) values[index] = '';
           }
         });
 
