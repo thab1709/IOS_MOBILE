@@ -235,9 +235,8 @@ class WorkByTransformerController extends GetxController {
         reportWorkItems.addAll(response.data.list);
         final totalPages = response.data.paging.totalPages;
 
-        // When no date filter, load ALL pages at once; otherwise load up to 5
-        final bool noDateFilter = fromDate == null || fromDate.isEmpty || toDate == null || toDate.isEmpty;
-        final maxInitialPages = noDateFilter ? totalPages : (totalPages > 5 ? 5 : totalPages);
+        // Giới hạn load tối đa 5 trang đầu tiên để tránh bị treo app/backend do gửi quá nhiều request cùng lúc
+          final maxInitialPages = totalPages > 5 ? 5 : totalPages;
         if (maxInitialPages > 1) {
           final futures = <Future<List<ReportWorkItem>>>[];
           for (int i = 2; i <= maxInitialPages; i++) {
