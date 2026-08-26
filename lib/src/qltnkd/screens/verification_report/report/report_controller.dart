@@ -1,4 +1,4 @@
-﻿// @dart=2.9
+// @dart=2.9
 import 'dart:async';
 import 'tab_form_controller.dart';
 import 'package:file_picker/file_picker.dart';
@@ -38,7 +38,7 @@ class ReportController extends GetxController {
   bool isAllowApprove = false;
   bool isAllowEditing = false;
   var isLoading = true.obs;
-  // Case 1: UploadFile (21) - Ä‘Ã­nh kÃ¨m file, gá»­i kÃ¨m khi LÆ°u form
+  // Case 1: UploadFile (21) - đính kèm file, gửi kèm khi Lưu form
   Future<void> pickUploadFiles(BuildContext context) async {
     try {
       final result = await FilePicker.platform.pickFiles(
@@ -54,18 +54,18 @@ class ReportController extends GetxController {
             .toList();
 
         debugPrint('=== pickUploadFiles ===');
-        debugPrint('Tá»•ng file chá»n: ${result.files.length}');
-        debugPrint('File há»£p lá»‡: ${validPaths.length}');
+        debugPrint('Tổng file chọn: ${result.files.length}');
+        debugPrint('File hợp lệ: ${validPaths.length}');
         for (var f in validPaths) {
           debugPrint('  + ${f.path}');
         }
 
         if (validPaths.isNotEmpty) {
           selectedFiles.addAll(validPaths);
-          debugPrint('selectedFiles hiá»‡n táº¡i: ${selectedFiles.length} file(s)');
+          debugPrint('selectedFiles hiện tại: ${selectedFiles.length} file(s)');
         } else {
           await rShowDialogOneButton(
-              'Chá»‰ há»— trá»£ Ä‘á»‹nh dáº¡ng: PDF, Word (doc/docx), Excel (xls/xlsx), áº¢nh (jpg/jpeg/png)');
+              'Chỉ hỗ trợ định dạng: PDF, Word (doc/docx), Excel (xls/xlsx), Ảnh (jpg/jpeg/png)');
         }
       }
     } catch (e, stack) {
@@ -73,16 +73,16 @@ class ReportController extends GetxController {
       debugPrint(stack.toString());
       final confirm = await Get.dialog(
         AlertDialog(
-          title: const Text('Lá»—i chá»n file'),
-          content: Text('Chi tiáº¿t lá»—i: $e\n\ná»¨ng dá»¥ng cáº§n quyá»n truy cáº­p Ä‘á»ƒ cÃ³ thá»ƒ chá»n file Ä‘Ã­nh kÃ¨m. Vui lÃ²ng má»Ÿ CÃ i Ä‘áº·t á»©ng dá»¥ng Ä‘á»ƒ kiá»ƒm tra quyá»n.'),
+          title: const Text('Lỗi chọn file'),
+          content: Text('Chi tiết lỗi: $e\n\nỨng dụng cần quyền truy cập để có thể chọn file đính kèm. Vui lòng mở Cài đặt ứng dụng để kiểm tra quyền.'),
           actions: [
             TextButton(
               onPressed: () => Get.back(result: false),
-              child: const Text('ÄÃ³ng'),
+              child: const Text('Đóng'),
             ),
             TextButton(
               onPressed: () => Get.back(result: true),
-              child: const Text('Má»Ÿ CÃ i Ä‘áº·t', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text('Mở Cài đặt', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -93,7 +93,7 @@ class ReportController extends GetxController {
     }
   }
 
-  // Case 2: ImportData (22) - chá»n file xlsx â†’ gá»i API â†’ mapping dá»¯ liá»‡u vÃ o form ngay
+  // Case 2: ImportData (22) - chọn file xlsx → gọi API → mapping dữ liệu vào form ngay
   Future<void> pickImportExcelFile(BuildContext context) async {
     try {
       final result = await FilePicker.platform.pickFiles(
@@ -108,7 +108,7 @@ class ReportController extends GetxController {
           importedExcelFile.value = File(file.path);
           await importExcelData(File(file.path));
         } else {
-          await rShowDialogOneButton('Chá»‰ há»— trá»£ file Excel (.xls, .xlsx) Ä‘á»ƒ nháº­p dá»¯ liá»‡u');
+          await rShowDialogOneButton('Chỉ hỗ trợ file Excel (.xls, .xlsx) để nhập dữ liệu');
         }
       }
     } catch (e, stack) {
@@ -116,16 +116,16 @@ class ReportController extends GetxController {
       debugPrint(stack.toString());
       final confirm = await Get.dialog(
         AlertDialog(
-          title: const Text('Lá»—i chá»n file'),
-          content: Text('Chi tiáº¿t lá»—i: $e'),
+          title: const Text('Lỗi chọn file'),
+          content: Text('Chi tiết lỗi: $e'),
           actions: [
             TextButton(
               onPressed: () => Get.back(result: false),
-              child: const Text('ÄÃ³ng'),
+              child: const Text('Đóng'),
             ),
             TextButton(
               onPressed: () => Get.back(result: true),
-              child: const Text('Má»Ÿ CÃ i Ä‘áº·t', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text('Mở Cài đặt', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -136,7 +136,7 @@ class ReportController extends GetxController {
     }
   }
 
-  // Giá»¯ láº¡i pickFiles Ä‘á»ƒ tÆ°Æ¡ng thÃ­ch ngÆ°á»£c (deprecated)
+  // Giữ lại pickFiles để tương thích ngược (deprecated)
   Future<void> pickFiles(BuildContext context) => pickUploadFiles(context);
 
   bool get hasAttachmentField {
@@ -187,12 +187,12 @@ class ReportController extends GetxController {
           _updateFieldByName(reportModel.value.fieldsModel, key.toString(), value?.toString() ?? '');
         });
       }
-      await rShowDialogOneButton('Äá»c dá»¯ liá»‡u Excel thÃ nh cÃ´ng');
+      await rShowDialogOneButton('Đọc dữ liệu Excel thành công');
       update();
     } else {
       final message = res != null ? res['message'].string : null;
       debugPrint('importExcelData failed: $message');
-      await rShowDialogOneButton(message?.isNotEmpty == true ? message : 'Äá»c dá»¯ liá»‡u Excel tháº¥t báº¡i');
+      await rShowDialogOneButton(message?.isNotEmpty == true ? message : 'Đọc dữ liệu Excel thất bại');
     }
   }
 
@@ -257,7 +257,7 @@ class ReportController extends GetxController {
         renderTextBtn();
         update();
       } else {
-        await rShowDialogOneButton('KhÃ´ng tÃ¬m tháº¥y biÃªn báº£n');
+        await rShowDialogOneButton('Không tìm thấy biên bản');
       }
     }
 
@@ -290,7 +290,7 @@ class ReportController extends GetxController {
     //
     // if (isHasError == true) {
     //   ProgressHUD.dismiss();
-    //   await showDialogError('Vui lÃ²ng nháº­p Ä‘á»§ thÃ´ng tin');
+    //   await showDialogError('Vui lòng nhập đủ thông tin');
     //   fieldModel.refresh();
     //   update();
     // } else {
@@ -325,16 +325,15 @@ class ReportController extends GetxController {
           (fieldNumberStamp.value == null ||
               (fieldNumberStamp.value != null &&
                   fieldNumberStamp.value.isEmpty))) {
-        await rShowDialogOneButton('Vui lÃ²ng nháº­p sá»‘ tem kiá»ƒm Ä‘á»‹nh');
+        await rShowDialogOneButton('Vui lòng nhập số tem kiểm định');
         return;
       }
     }
 
     Future updateFormOnline() async {
-
       await evaluateAllThresholds();
       
-      // TÃ¬m táº¥t cáº£ cÃ¡c file cá»¥c bá»™ trong form vÃ  Ä‘áº©y vÃ o selectedFiles Ä‘á»ƒ gá»­i qua putMultipart
+      // Tìm tất cả các file cục bộ trong form và đẩy vào selectedFiles để gửi qua putMultipart
       void _extractDynamicFiles(List<FieldModel> fields) {
         if (fields == null) return;
         for (var f in fields) {
@@ -346,7 +345,7 @@ class ReportController extends GetxController {
                 if (filesList[i]['isLocal'] == true && filesList[i]['path'] != null) {
                   File file = File(filesList[i]['path']);
                   if (file.existsSync()) {
-                    // ThÃªm file vÃ o máº£ng selectedFiles Ä‘á»ƒ gá»­i má»™t láº§n qua /formreport
+                    // Thêm file vào mảng selectedFiles để gửi một lần qua /formreport
                     selectedFiles.add(file);
                     filesList[i].remove('isLocal');
                     filesList[i].remove('path');
@@ -394,31 +393,31 @@ class ReportController extends GetxController {
             }
           }
           updateFieldValues(reportModel.value.fieldsModel, response.data.fieldsModel);
-          update(); // Cáº­p nháº­t UI chung
-          reportModel.refresh(); // Cáº­p nháº­t cÃ¡c component Obx (nhÆ° cá»™t tÃ¬nh tráº¡ng)
+          update(); // Cập nhật UI chung
+          reportModel.refresh(); // Cập nhật các component Obx (như cột tình trạng)
         }
-        SnackBarHUD.show('Cáº­p nháº­t biÃªn báº£n thÃ nh cÃ´ng');
+        SnackBarHUD.show('Cập nhật biên bản thành công');
         
-        // Theo yÃªu cáº§u má»›i, bá» Ä‘iá»u kiá»‡n isCbm, luÃ´n gá»i Ä‘á»“ng bá»™ khi LÆ°u thÃ nh cÃ´ng
+        // Theo yêu cầu mới, bỏ điều kiện isCbm, luôn gọi đồng bộ khi Lưu thành công
         final syncResponse = await service.syncPmisCbm(reportId.toString());
         if (syncResponse != null) {
           final msg = (syncResponse.message != null && syncResponse.message.isNotEmpty)
               ? syncResponse.message
-              : 'Äá»“ng bá»™ PMIS CBM thÃ nh cÃ´ng';
+              : 'Đồng bộ PMIS CBM thành công';
               
-          // Náº¿u BE tráº£ vá» message bÃ¡o thÃ nh cÃ´ng thÃ¬ hiá»‡n Toast cho nhanh
-          // CÃ²n náº¿u lÃ  cÃ¢u cáº£nh bÃ¡o/lá»—i thÃ¬ hiá»‡n Popup Ä‘á»ƒ user báº¯t buá»™c pháº£i Ä‘á»c
-          if (msg.toLowerCase().contains('thÃ nh cÃ´ng')) {
+          // Nếu BE trả về message báo thành công thì hiện Toast cho nhanh
+          // Còn nếu là câu cảnh báo/lỗi thì hiện Popup để user bắt buộc phải đọc
+          if (msg.toLowerCase().contains('thành công')) {
             SnackBarHUD.show(msg);
           } else {
             await rShowDialogOneButton(msg);
           }
         }
 
-        // XÃ³a danh sÃ¡ch file Ä‘Ã£ chá»n sau khi gá»­i thÃ nh cÃ´ng Ä‘á»ƒ khÃ´ng bá»‹ gá»­i láº¡i náº¿u nháº¥n LÆ°u láº§n ná»¯a
+        // Xóa danh sách file đã chọn sau khi gửi thành công để không bị gửi lại nếu nhấn Lưu lần nữa
         if (selectedFiles.isNotEmpty) {
           selectedFiles.clear();
-          update(); // Cáº­p nháº­t láº¡i giao diá»‡n (áº©n danh sÃ¡ch file Ä‘Ã£ gá»­i)
+          update(); // Cập nhật lại giao diện (ẩn danh sách file đã gửi)
         }
      final reportOffline =  await RLocalDataManager.instance.getReportFormDetail(reportId);
 
@@ -460,7 +459,7 @@ class ReportController extends GetxController {
               orElse: () => null),
           reportResponse.value.scheduleId);
       ProgressHUD.dismiss();
-      SnackBarHUD.show('Cáº­p nháº­t biÃªn báº£n offline thÃ nh cÃ´ng');
+      SnackBarHUD.show('Cập nhật biên bản offline thành công');
     }
 
     final isOnline = await RConnection.shared.checkConnection();
@@ -544,7 +543,7 @@ class ReportController extends GetxController {
     final response = await service.sendOperation(
         formReportId: reportId, content: content, approveId: approveId);
     if (response.isLoadSuccess) {
-      await rShowDialogOneButton('Gá»­i phÃª duyá»‡t thÃ nh cÃ´ng', action: () {
+      await rShowDialogOneButton('Gửi phê duyệt thành công', action: () {
         Get.until((route) => [Routes.listReportScreen, Routes.detailWorkScreen]
             .contains(route.settings.name));
       });
@@ -565,7 +564,7 @@ class ReportController extends GetxController {
         formReportId: reportId, content: content, isApproval: isApproval);
     if (response.isLoadSuccess) {
       await rShowDialogOneButton(
-          isApproval ? 'PhÃª duyá»‡t thÃ nh cÃ´ng' : 'Tá»« chá»‘i thÃ nh cÃ´ng',
+          isApproval ? 'Phê duyệt thành công' : 'Từ chối thành công',
           action: () {
         Get.until((route) => [Routes.listReportScreen, Routes.detailWorkScreen]
             .contains(route.settings.name));
@@ -587,7 +586,7 @@ class ReportController extends GetxController {
         formReportIds: [reportId], content: content, isApproval: isApproval);
     if (response.isLoadSuccess) {
       await rShowDialogOneButton(
-          isApproval ? 'PhÃª duyá»‡t thÃ nh cÃ´ng' : 'Tá»« chá»‘i thÃ nh cÃ´ng',
+          isApproval ? 'Phê duyệt thành công' : 'Từ chối thành công',
           action: () {
         Get.until((route) => [Routes.listReportScreen, Routes.detailWorkScreen]
             .contains(route.settings.name));
@@ -636,14 +635,14 @@ class ReportController extends GetxController {
   void showReject() {
     actionReject = () {
       showDialogApproval(
-          title: 'Tá»« chá»‘i',
+          title: 'Từ chối',
           onChangeContent: (value) {
             content = value;
           },
           negativeAction: () {
             content = '';
           },
-          actionText: 'Tá»« chá»‘i',
+          actionText: 'Từ chối',
           positiveAction: () {
             if (RUserRole.isOperator) {
               approvalOperationTeam(isApproval: false);
@@ -668,10 +667,10 @@ class ReportController extends GetxController {
     // }
     // switch (reportResponse.value.status.toString()) {
     //   case '${ReportStatusType.Implementing}':
-    //     textBtn = 'Gá»­i phÃª duyá»‡t';
+    //     textBtn = 'Gửi phê duyệt';
     //     showApproval(
     //       title: textBtn,
-    //       actionText: 'Gá»­i',
+    //       actionText: 'Gửi',
     //     );
     //
     //     isHasApproval = RUserRole.isWorker || (RUserRole.isOperator && (userImpl == null || currentUser.id == userImpl));
@@ -680,11 +679,11 @@ class ReportController extends GetxController {
     //     break;
     //
     //   case '${ReportStatusType.Rejected}':
-    //     textBtn = 'Gá»­i phÃª duá»µá»‡t';
+    //     textBtn = 'Gửi phê duỵệt';
     //
     //     showApproval(
     //       title: textBtn,
-    //       actionText: 'Gá»­i',
+    //       actionText: 'Gửi',
     //     );
     //
     //     isHasApproval = RUserRole.isWorker || (RUserRole.isOperator && (userImpl == null || currentUser.id == userImpl));
@@ -693,10 +692,10 @@ class ReportController extends GetxController {
     //     break;
     //
     //   case '${ReportStatusType.WaitingForTeamApproval}':
-    //     textBtn = 'PhÃª duyá»‡t';
+    //     textBtn = 'Phê duyệt';
     //     showApproval(
-    //       title: 'PhÃª duyá»‡t cáº¥p tá»• Ä‘á»™i',
-    //       actionText: 'PhÃª duyá»‡t',
+    //       title: 'Phê duyệt cấp tổ đội',
+    //       actionText: 'Phê duyệt',
     //     );
     //
     //     showReject();
@@ -712,11 +711,11 @@ class ReportController extends GetxController {
     //     }
     //     break;
     //   case '${ReportStatusType.WaitingForCenterApproval}':
-    //     textBtn = 'PhÃª duyá»‡t';
+    //     textBtn = 'Phê duyệt';
     //
     //     showApproval(
-    //       title: 'PhÃª duyá»‡t cáº¥p trung tÃ¢m',
-    //       actionText: 'PhÃª duyá»‡t',
+    //       title: 'Phê duyệt cấp trung tâm',
+    //       actionText: 'Phê duyệt',
     //     );
     //
     //     showReject();
@@ -726,11 +725,11 @@ class ReportController extends GetxController {
     //
     //     break;
     //   case '${ReportStatusType.WaitingForCompanyApproval}':
-    //     textBtn = 'PhÃª duyá»‡t';
+    //     textBtn = 'Phê duyệt';
     //
     //     showApproval(
-    //       title: 'PhÃª duyá»‡t cáº¥p cÃ´ng ty',
-    //       actionText: 'PhÃª duyá»‡t',
+    //       title: 'Phê duyệt cấp công ty',
+    //       actionText: 'Phê duyệt',
     //     );
     //
     //     showReject();
@@ -740,13 +739,13 @@ class ReportController extends GetxController {
     //     break;
     //
     //   case '${ReportStatusType.Completed}':
-    //     textBtn = 'HoÃ n thÃ nh';
+    //     textBtn = 'Hoàn thành';
     //     isHasApproval = false;
     //     isHasReject = false;
     //     break;
     //
     //   case '${ReportStatusType.all}':
-    //     textBtn = 'Táº¥t cáº£';
+    //     textBtn = 'Tất cả';
     //     isHasApproval = false;
     //     isHasReject = false;
     //     break;
@@ -812,7 +811,7 @@ class ReportController extends GetxController {
   Timer _evaluateDebounce;
 
     Future<void> evaluateAllThresholds() async {
-      debugPrint('Báº¯t Ä‘áº§u Ä‘Ã¡nh giÃ¡ toÃ n bá»™ tÃ¬nh tráº¡ng...');
+      debugPrint('Bắt đầu đánh giá toàn bộ tình trạng...');
       final evaluateFields = _findAllEvaluateFields(reportModel.value.fieldsModel);
       bool hasChanges = false;
       for (var evalField in evaluateFields) {
