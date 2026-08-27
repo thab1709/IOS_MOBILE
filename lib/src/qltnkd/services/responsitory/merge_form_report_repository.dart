@@ -115,6 +115,7 @@ class MergerFormReportRepository {
     num pageOffset,
     bool isNotShowLoading = false,
     bool isPaperReport,
+    int groupType = 0,
   }) async {
     final param = {
       'Id': id,
@@ -134,7 +135,8 @@ class MergerFormReportRepository {
       'pageOffset': pageOffset?.toString(),
     };
     try {
-      final data = await _provider.get('/mergeformreport',
+      final endpoint = groupType == 1 ? '/constructionformreport' : '/mergeformreport';
+      final data = await _provider.get(endpoint,
           params: param, isRequireAuth: true, backgroundMode: isNotShowLoading);
       final response = ServerResponse<MergeReportResponse>.fromJson(data);
       final report = MergeReportResponse.fromJson(data);

@@ -47,6 +47,7 @@ class ReportByTransformerController extends GetxController {
   final service = MergerFormReportRepository();
   final isShowLoading = false.obs;
   final searchTerm = ''.obs;
+  final workGroupType = 0.obs;
   bool isFirstLoad = false;
   DateTime fromDateTime = DateTime.now();
   DateTime toDateTime = DateTime.now();

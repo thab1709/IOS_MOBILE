@@ -2,6 +2,7 @@
 import 'package:evnmobile/src/qltnkd/screens/verification_report/report_by_transformer/report_by_transformer_controller.dart';
 import 'package:evnmobile/src/qltnkd/screens/verification_report/report_by_transformer/widgets/item_report_by_transformer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -226,14 +227,44 @@ class _ReportByTransformerState extends State<ReportByTransformer>
       drawer: AppDrawer(
         index: CategoryMenu.reportBySubstation,
       ),
-      body: Obx(() {
-        if (_controller.listReportByTransformerModel.isEmpty ??
-            true && _controller.isFirstLoad) {
-          return const Center(
-            child: Text('Danh sách trống'),
-          );
-        }
-        return SmartRefresher(
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Center(
+              child: Obx(() => CupertinoSlidingSegmentedControl<int>(
+                    groupValue: _controller.workGroupType.value,
+                    children: const {
+                      0: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text('Đơn vị'),
+                      ),
+                      1: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text('Cho các X'),
+                      ),
+                    },
+                    onValueChanged: (value) {
+                      if (_controller.workGroupType.value != value) {
+                        _controller.workGroupType.value = value;
+                        _controller.listReportByTransformerModel.clear();
+                        _controller.getWorkMerge();
+                      }
+                    },
+                  )),
+            ),
+          ),
+          Expanded(
+            child: Obx(() {
+              if (_controller.listReportByTransformerModel.isEmpty ??
+                  true && _controller.isFirstLoad) {
+                return const Center(
+                  child: Text('Danh sách trống'),
+                );
+              }
+              return SmartRefresher(
           enablePullDown: true,
           enablePullUp: false,
           header: WaterDropHeader(
